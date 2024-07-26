@@ -1,13 +1,12 @@
 import React from "react";
 import {
-	AppBar,
-	Toolbar,
 	Typography,
 	Button,
 	Container,
 	Grid,
 	Box,
 	Card,
+	CardContent,
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import styled from "@emotion/styled";
@@ -68,15 +67,46 @@ const FeatureCard = styled(Card)`
 	margin: 10px;
 `;
 
+const AboutSection = styled.section`
+	padding: 60px 20px;
+	background-color: #fff;
+	text-align: center;
+`;
+
+const ContactSection = styled.section`
+	padding: 60px 20px;
+	background-color: #fff;
+	text-align: center;
+`;
+
+const SectionContent = styled.div`
+	max-width: 800px;
+	margin: 0 auto;
+	text-align: left;
+	p {
+		margin-bottom: 15px;
+	}
+`;
+
+const ContactCard = styled(Card)`
+	background-color: #f5f5f5;
+	border-radius: 15px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	padding: 20px;
+	text-align: left;
+	margin: 10px auto;
+	max-width: 800px;
+`;
+
 const HomePage = () => {
 	return (
 		<div>
 			<HomeNavbar />
 			<MainContainer>
-				<HeroSection className="hero">
+				<HeroSection id="hero" className="hero">
 					<div className="hero-content">
 						<Typography variant="h2" component="h1">
-							Discover Amazing Tourist Attractions
+							Discover Amazing Tourist Attractions in Rwanda
 						</Typography>
 						<Typography variant="body1">
 							GuideGlide helps you explore and learn more about the best tourist
@@ -93,7 +123,7 @@ const HomePage = () => {
 						</Button>
 					</div>
 				</HeroSection>
-				<FeaturesSection className="features">
+				<FeaturesSection id="features" className="features">
 					<Typography variant="h3" component="h2">
 						Features
 					</Typography>
@@ -112,7 +142,7 @@ const HomePage = () => {
 						<Grid item xs={12} sm={6} md={4}>
 							<FeatureCard>
 								<Typography variant="h5" component="h3">
-									Transport & Safety
+									Travel & Safety
 								</Typography>
 								<Typography variant="body1">
 									Get up-to-date information on transport options and safety
@@ -134,33 +164,73 @@ const HomePage = () => {
 						<Grid item xs={12} sm={6} md={4}>
 							<FeatureCard>
 								<Typography variant="h5" component="h3">
-									Personalised Recommendation System
+									Personalised Suggestions
 								</Typography>
 								<Typography variant="body1">
-									Receive personalized recommendations based on your interests
+									Receive personalised recommendations based on your interests
+									and preferences to make the most out of your travels.
+								</Typography>
+							</FeatureCard>
+						</Grid>
+						<Grid item xs={12} sm={6} md={4}>
+							<FeatureCard>
+								<Typography variant="h5" component="h3">
+									AR/VR Experience
+								</Typography>
+								<Typography variant="body1">
+									Receive personalised recommendations based on your interests
+									and preferences to make the most out of your travels.
+								</Typography>
+							</FeatureCard>
+						</Grid>
+						<Grid item xs={12} sm={6} md={4}>
+							<FeatureCard>
+								<Typography variant="h5" component="h3">
+									Voice assistance
+								</Typography>
+								<Typography variant="body1">
+									Receive personalised recommendations based on your interests
 									and preferences to make the most out of your travels.
 								</Typography>
 							</FeatureCard>
 						</Grid>
 					</Grid>
 				</FeaturesSection>
-			</MainContainer>
-			{/* <Box
-				component="footer"
-				sx={{
-					py: 3,
-					px: 2,
-					mt: "auto",
-					backgroundColor: "#f5f5f5",
-					textAlign: "center",
-				}}
-			>
-				<Container maxWidth="sm">
-					<Typography variant="body1">
-						&copy; 2024 GuideGlide. All rights reserved.
+				<AboutSection id="about" className="about">
+					<Typography variant="h3" component="h2">
+						About Us
 					</Typography>
-				</Container>
-			</Box> */}
+					<SectionContent>
+						<ContactCard>
+							<CardContent>
+								<Typography variant="body1">
+									GuideGlide is dedicated to helping travelers discover the
+									beauty of Rwanda. Our platform offers a comprehensive guide to
+									the best tourist attractions, interactive maps, and up-to-date
+									travel information to make your journey memorable and safe.
+								</Typography>
+							</CardContent>
+						</ContactCard>
+					</SectionContent>
+				</AboutSection>
+				<ContactSection id="contact" className="contact">
+					<Typography variant="h3" component="h2">
+						Contact Us
+					</Typography>
+					<ContactCard>
+						<CardContent>
+							<Typography variant="body1">
+								Have questions or need assistance? Reach out to us at:
+							</Typography>
+							<Typography variant="body1">
+								Email: support@guideglide.com
+							</Typography>
+							<Typography variant="body1">Phone: +250 123 456 789</Typography>
+							<Typography variant="body1">Address: Kigali, Rwanda</Typography>
+						</CardContent>
+					</ContactCard>
+				</ContactSection>
+			</MainContainer>
 		</div>
 	);
 };
