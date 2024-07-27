@@ -52,7 +52,7 @@ const ProfilePage = ({ user }) => {
 				{
 					headers: {
 						"Content-Type": "application/json",
-						Authorization: `Bearer ${user.userId}`, // Use userId or other identifier
+						Authorization: `Bearer ${user.userId}`,
 					},
 				}
 			);
