@@ -13,7 +13,7 @@ const logInteraction = async (username, attractionId, interactionType) => {
 
 	try {
 		const response = await axios.post(
-			"https://bkyne235j9.execute-api.us-east-1.amazonaws.com/prod/interactions", // Update with your correct URL
+			"https://84g3cj7o91.execute-api.us-east-1.amazonaws.com/prod/interactions", // Update with your correct URL
 			payload,
 			{
 				headers: {
