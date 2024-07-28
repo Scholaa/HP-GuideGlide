@@ -9,11 +9,10 @@ const logInteraction = async (username, attractionId, interactionType) => {
 		timestamp,
 	};
 
-	console.log("Payload:", payload); // Log the payload being sent
-
+	console.log("Payload:", payload); 
 	try {
 		const response = await axios.post(
-			"https://84g3cj7o91.execute-api.us-east-1.amazonaws.com/prod/interactions", // Update with your correct URL
+			`${process.env.REACT_APP_LOG_INTERACTIONS_API_URL}/interactions`,
 			payload,
 			{
 				headers: {
