@@ -12,9 +12,6 @@ import { Link as RouterLink } from "react-router-dom";
 import styled from "@emotion/styled";
 import HomeNavbar from "../components/HomeNavbar";
 
-// Cloudinary base URL
-const cloudinaryBaseUrl = "https://res.cloudinary.com/dtbpblrgg/video/upload/";
-
 const MainContainer = styled(Container)`
 	padding-bottom: 40px;
 	text-align: center;
@@ -29,10 +26,7 @@ const HeroSection = styled.section`
 	justify-content: center;
 	height: 100vh;
 	width: 100%;
-	position: absolute;
-	left: 0;
-	right: 0;
-	top: 0;
+	position: relative;
 	overflow: hidden;
 
 	video {
@@ -43,6 +37,12 @@ const HeroSection = styled.section`
 		left: 50%;
 		transform: translate(-50%, -50%);
 		object-fit: cover;
+	}
+
+	@media (max-width: 768px) {
+		video {
+			height: 100%;
+		}
 	}
 
 	.video-caption {
@@ -102,24 +102,12 @@ const ContactCard = styled(Card)`
 
 const HomePage = () => {
 	// Function to create Cloudinary URL with responsive parameters
-	const createCloudinaryUrl = (
-		publicId,
-		width,
-		height,
-		quality = "auto",
-		crop = "limit"
-	) => {
-		return `${cloudinaryBaseUrl}w_${width},h_${height},c_${crop},q_${quality}/${publicId}`;
+	const createCloudinaryUrl = (publicId, quality = "auto") => {
+		return `https://res.cloudinary.com/dtbpblrgg/video/upload/q_${quality},w_auto/${publicId}`;
 	};
 
 	// Cloudinary video URL with transformations
-	const cloudinaryVideoUrl = createCloudinaryUrl(
-		"homepage_xxie1m",
-		1280,
-		720,
-		"auto",
-		"limit"
-	);
+	const cloudinaryVideoUrl = createCloudinaryUrl("homepage_xxie1m");
 
 	return (
 		<div>
