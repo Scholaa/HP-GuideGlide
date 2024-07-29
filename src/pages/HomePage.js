@@ -12,9 +12,8 @@ import { Link as RouterLink } from "react-router-dom";
 import styled from "@emotion/styled";
 import HomeNavbar from "../components/HomeNavbar";
 
-// Cloudinary URL
-const cloudinaryVideoUrl =
-	"https://res.cloudinary.com/dtbpblrgg/video/upload/q_auto,w_1280/v1234567890/homepage_xxie1m.webm";
+// Cloudinary base URL
+const cloudinaryBaseUrl = "https://res.cloudinary.com/dtbpblrgg/video/upload/";
 
 const MainContainer = styled(Container)`
 	padding-bottom: 40px;
@@ -34,6 +33,8 @@ const HeroSection = styled.section`
 	left: 0;
 	right: 0;
 	top: 0;
+	overflow: hidden;
+
 	video {
 		position: absolute;
 		width: 100%;
@@ -100,6 +101,26 @@ const ContactCard = styled(Card)`
 `;
 
 const HomePage = () => {
+	// Function to create Cloudinary URL with responsive parameters
+	const createCloudinaryUrl = (
+		publicId,
+		width,
+		height,
+		quality = "auto",
+		crop = "limit"
+	) => {
+		return `${cloudinaryBaseUrl}w_${width},h_${height},c_${crop},q_${quality}/${publicId}`;
+	};
+
+	// Cloudinary video URL with transformations
+	const cloudinaryVideoUrl = createCloudinaryUrl(
+		"homepage_xxie1m",
+		1280,
+		720,
+		"auto",
+		"limit"
+	);
+
 	return (
 		<div>
 			<HomeNavbar />
