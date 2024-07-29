@@ -35,6 +35,7 @@ const AuthenticatedNavbar = ({ signOut }) => {
 		{ label: "Travel & Safety", to: "/transport-safety" },
 		{ label: "Weather Forecast", to: "/weather" },
 		{ label: "Profile", to: "/profile" },
+		// { label: "Recommendations", to: "/recommendations" },
 		{ label: "Logout", to: "/", action: signOut },
 	];
 

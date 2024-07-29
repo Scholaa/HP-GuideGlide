@@ -132,7 +132,7 @@ import { Container, Box, Typography } from "@mui/material";
 import axios from "axios";
 import Map from "./components/Map";
 import HomePage from "./pages/HomePage";
-import MapPage from "./pages/MapPage";
+import RecsPage from "./pages/RecsPage";
 import TransportSafetyPage from "./pages/TransportSafetyPage";
 import WeatherPage from "./pages/WeatherPage";
 import ProfilePage from "./pages/ProfilePage";
@@ -224,6 +224,19 @@ const App = () => {
 									<>
 										<AuthenticatedNavbar signOut={signOut} />
 										<ProfilePage user={user} signOut={signOut} />
+									</>
+								)}
+							</Authenticator>
+						}
+					/>
+					<Route
+						path="/recommendations"
+						element={
+							<Authenticator>
+								{({ signOut, user }) => (
+									<>
+										<AuthenticatedNavbar signOut={signOut} />
+										<RecsPage user={user} signOut={signOut} />
 									</>
 								)}
 							</Authenticator>

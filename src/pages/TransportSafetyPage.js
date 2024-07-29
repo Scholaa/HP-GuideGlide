@@ -81,32 +81,33 @@ const TransportSafetyPage = ({ signOut }) => {
 	};
 
 	const handleDefaultLocation = (error) => {
+		let alertMessage = "Using default location.";
 		if (error) {
 			switch (error.code) {
 				case error.PERMISSION_DENIED:
-					alert(
-						"User denied the request for Geolocation. Using default location."
-					);
+					alertMessage = "User denied the request for Geolocation.";
 					break;
 				case error.POSITION_UNAVAILABLE:
-					alert("Location information is unavailable. Using default location.");
+					alertMessage = "Location information is unavailable.";
 					break;
 				case error.TIMEOUT:
-					alert(
-						"The request to get user location timed out. Using default location."
-					);
+					alertMessage = "The request to get user location timed out.";
 					break;
 				case error.UNKNOWN_ERROR:
-					alert("An unknown error occurred. Using default location.");
+					alertMessage = "An unknown error occurred.";
 					break;
 				default:
-					alert("Using default location.");
+					alertMessage = "An unexpected error occurred.";
 					break;
 			}
+			alert(`${alertMessage} Using default location.`);
+		} else {
+			alert(alertMessage);
 		}
 		reverseGeocode(defaultLat, defaultLon);
 		fetchWeather(defaultLat, defaultLon);
 	};
+
 
 	const reverseGeocode = (lat, lon) => {
 		const apiKey = "1c8d524602e745e2a4a71e3185d031ef";
@@ -153,7 +154,7 @@ const TransportSafetyPage = ({ signOut }) => {
 	};
 
 	const fetchWeather = (lat, lon) => {
-		const apiKey = "dd8f9786616a2d80a20f01b2483bbb4f"; // Replace with your OpenWeatherMap API key
+		const apiKey = process.env.REACT_WEATHER_API_KEY;
 		const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
 
 		fetch(url)
