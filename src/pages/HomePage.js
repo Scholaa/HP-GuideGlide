@@ -73,7 +73,7 @@ const HeroSection = styled.section`
 		width: 100%;
 		text-align: center;
 		font-size: 14px;
-		color: #f0f0f0;
+		color: rgb(0, 0, 0.5);
 		z-index: 2;
 		padding-bottom: 50px;
 	}
