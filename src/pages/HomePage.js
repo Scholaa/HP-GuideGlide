@@ -10,25 +10,27 @@ import {
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import styled from "@emotion/styled";
-import HeroVideo from "../assets/input.webm";
 import HomeNavbar from "../components/HomeNavbar";
+
+// Cloudinary URL
+const cloudinaryVideoUrl =
+	"https://res.cloudinary.com/dtbpblrgg/video/upload/q_auto,w_1280/v1234567890/input_jfwjti.webm";
 
 const MainContainer = styled(Container)`
 	padding-bottom: 40px;
 	text-align: center;
 `;
 
-
 const HeroSection = styled.section`
 	color: white;
-	padding: 0; 
-	margin: 0; 
+	padding: 0;
+	margin: 0;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 100vh; 
-	width: 100%; 
-	position: absolute; 
+	height: 100vh;
+	width: 100%;
+	position: absolute;
 	left: 0;
 	right: 0;
 	top: 0;
@@ -42,23 +44,13 @@ const HeroSection = styled.section`
 		object-fit: cover;
 	}
 
-	// .hero-content {
-	// 	position: relative;
-	// 	max-width: 600px;
-	// 	text-align: center;
-	// 	background-color: rgba(0, 0, 0, 0.5);
-	// 	padding: 20px;
-	// 	border-radius: 8px;
-	// 	z-index: 2;
-	// }
-
 	.video-caption {
 		position: absolute;
-		bottom: 10px; 
+		bottom: 10px;
 		width: 100%;
 		text-align: center;
-		font-size: 14px; 
-		color: #f0f0f0; 
+		font-size: 14px;
+		color: #f0f0f0;
 		z-index: 2;
 	}
 `;
@@ -78,7 +70,6 @@ const FeatureCard = styled(Card)`
 
 const AboutSection = styled.section`
 	padding-top: 700px;
-	// padding: 60px 20px;
 	background-color: #fff;
 	text-align: center;
 `;
@@ -115,30 +106,10 @@ const HomePage = () => {
 			<Box sx={{ paddingTop: "100px" }}></Box>
 			<HeroSection id="hero" className="hero">
 				<video autoPlay muted loop>
-					<source src={HeroVideo} type="video/mp4" />
+					<source src={cloudinaryVideoUrl} type="video/webm" />
 					Your browser does not support the video tag.
 				</video>
-				<div className="video-caption">
-					Credit: Visit Rwanda
-				</div>
-				{/* <div className="hero-content">
-					<Typography variant="h4" component="h4">
-						Discover Amazing Tourist Attractions in Rwanda
-					</Typography>
-					<Typography variant="body1">
-						GuideGlide helps you explore and learn more about the best tourist
-						spots around you.
-					</Typography>
-					<Button
-						variant="contained"
-						color="primary"
-						size="large"
-						component={RouterLink}
-						to="/login"
-					>
-						Get Started
-					</Button>
-				</div> */}
+				<div className="video-caption">Credit: Visit Rwanda</div>
 			</HeroSection>
 
 			<MainContainer>
@@ -223,19 +194,19 @@ const HomePage = () => {
 									AR/VR Experience
 								</Typography>
 								<Typography variant="body1">
-									Receive personalised recommendations based on your interests
-									and preferences to make the most out of your travels.
+									Experience tourist attractions in an immersive way using AR/VR
+									technology.
 								</Typography>
 							</FeatureCard>
 						</Grid>
 						<Grid item xs={12} sm={6} md={4}>
 							<FeatureCard>
 								<Typography variant="h5" component="h3">
-									Voice assistance
+									Voice Assistance
 								</Typography>
 								<Typography variant="body1">
-									Receive personalised recommendations based on your interests
-									and preferences to make the most out of your travels.
+									Get voice-guided assistance for a hands-free experience while
+									exploring.
 								</Typography>
 							</FeatureCard>
 						</Grid>
