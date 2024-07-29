@@ -41,7 +41,6 @@ const HeroSection = styled.section`
 		transform: translate(-50%, -50%);
 		object-fit: cover;
 		display: none;
-		padding-bottom: 30px;
 	}
 
 	.image {
@@ -49,7 +48,6 @@ const HeroSection = styled.section`
 		height: 100%;
 		object-fit: cover;
 		display: block;
-		padding-bottom: 30px;
 	}
 
 	.hero-content {
@@ -119,7 +117,7 @@ const FeatureCard = styled(Card)`
 `;
 
 const AboutSection = styled.section`
-	padding-top: 700px;
+	padding-top: 730px;
 	background-color: #fff;
 	text-align: center;
 `;
