@@ -31,7 +31,6 @@ const HeroSection = styled.section`
 	right: 0;
 	top: 0;
 	overflow: hidden;
-	padding-bottom: 50px;
 
 	.video {
 		position: absolute;
@@ -42,6 +41,7 @@ const HeroSection = styled.section`
 		transform: translate(-50%, -50%);
 		object-fit: cover;
 		display: none;
+		padding-bottom: 30px;
 	}
 
 	.image {
@@ -49,6 +49,7 @@ const HeroSection = styled.section`
 		height: 100%;
 		object-fit: cover;
 		display: block;
+		padding-bottom: 30px;
 	}
 
 	.hero-content {
@@ -76,6 +77,7 @@ const HeroSection = styled.section`
 		font-size: 14px;
 		color: #f0f0f0;
 		z-index: 2;
+		padding-bottom: 50px;
 	}
 
 	@media (min-width: 768px) {
