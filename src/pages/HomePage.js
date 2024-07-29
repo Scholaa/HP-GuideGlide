@@ -14,7 +14,7 @@ import HomeNavbar from "../components/HomeNavbar";
 
 // Cloudinary URL
 const cloudinaryVideoUrl =
-	"https://res.cloudinary.com/dtbpblrgg/video/upload/q_auto,w_1280/v1234567890/input_jfwjti.webm";
+	"https://res.cloudinary.com/dtbpblrgg/video/upload/q_auto,w_1280/v1234567890/homepage_xxie1m.webm";
 
 const MainContainer = styled(Container)`
 	padding-bottom: 40px;
