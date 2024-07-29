@@ -31,6 +31,7 @@ const HeroSection = styled.section`
 	right: 0;
 	top: 0;
 	overflow: hidden;
+	padding-bottom: 50px;
 
 	.video {
 		position: absolute;
