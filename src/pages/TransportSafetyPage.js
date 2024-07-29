@@ -1,5 +1,7 @@
 // src/pages/TransportSafetyPage.js
 import React, { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
 	Card,
 	CardContent,
@@ -81,33 +83,31 @@ const TransportSafetyPage = ({ signOut }) => {
 	};
 
 	const handleDefaultLocation = (error) => {
-		let alertMessage = "Using default location.";
+		let message = "Using default location.";
 		if (error) {
 			switch (error.code) {
 				case error.PERMISSION_DENIED:
-					alertMessage = "User denied the request for Geolocation.";
+					message = "User denied the request for Geolocation.";
 					break;
 				case error.POSITION_UNAVAILABLE:
-					alertMessage = "Location information is unavailable.";
+					message = "Location information is unavailable.";
 					break;
 				case error.TIMEOUT:
-					alertMessage = "The request to get user location timed out.";
+					message = "The request to get user location timed out.";
 					break;
 				case error.UNKNOWN_ERROR:
-					alertMessage = "An unknown error occurred.";
+					message = "An unknown error occurred.";
 					break;
 				default:
-					alertMessage = "An unexpected error occurred.";
+					message = "An unexpected error occurred.";
 					break;
 			}
-			alert(`${alertMessage} Using default location.`);
-		} else {
-			alert(alertMessage);
+			message += " Using default location.";
 		}
+		toast.warn(message);
 		reverseGeocode(defaultLat, defaultLon);
 		fetchWeather(defaultLat, defaultLon);
 	};
-
 
 	const reverseGeocode = (lat, lon) => {
 		const apiKey = "1c8d524602e745e2a4a71e3185d031ef";
@@ -154,7 +154,7 @@ const TransportSafetyPage = ({ signOut }) => {
 	};
 
 	const fetchWeather = (lat, lon) => {
-		const apiKey = process.env.REACT_WEATHER_API_KEY;
+		const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
 		const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
 
 		fetch(url)
@@ -221,6 +221,7 @@ const TransportSafetyPage = ({ signOut }) => {
 				<AuthenticatedNavbar signOut={signOut} />
 				<Box sx={{ paddingTop: "80px" }}></Box>
 			</div>
+			<ToastContainer />
 			<SectionTitle variant="h4">Travel & Safety</SectionTitle>
 			<Grid container spacing={3}>
 				<Grid item xs={12} md={8}>
