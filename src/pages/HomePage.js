@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import styled from "@emotion/styled";
-import HeroVideo from "../assets/output2.mp4";
+import HeroVideo from "../assets/input.webm";
 import HomeNavbar from "../components/HomeNavbar";
 
 const MainContainer = styled(Container)`
