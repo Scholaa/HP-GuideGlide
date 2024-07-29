@@ -26,10 +26,13 @@ const HeroSection = styled.section`
 	justify-content: center;
 	height: 100vh;
 	width: 100%;
-	position: relative;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
 	overflow: hidden;
 
-	video {
+	.video {
 		position: absolute;
 		width: 100%;
 		height: 100%;
@@ -37,12 +40,31 @@ const HeroSection = styled.section`
 		left: 50%;
 		transform: translate(-50%, -50%);
 		object-fit: cover;
+		display: none;
 	}
 
-	@media (max-width: 768px) {
-		video {
-			height: 100%;
-		}
+	.image {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+	}
+
+	.hero-content {
+		display: none;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 400px;
+		height: 200px;
+		max-width: 600px;
+		text-align: center;
+		background-color: rgba(0, 0, 0, 0.5);
+		padding: 20px;
+		border-radius: 8px;
+		z-index: 2;
+		margin-bottom: 16px;
 	}
 
 	.video-caption {
@@ -53,6 +75,30 @@ const HeroSection = styled.section`
 		font-size: 14px;
 		color: #f0f0f0;
 		z-index: 2;
+	}
+
+	@media (min-width: 768px) {
+		.video {
+			display: block;
+		}
+		.image {
+			display: none;
+		}
+		.hero-content {
+			display: none;
+		}
+	}
+
+	@media (max-width: 767px) {
+		.video {
+			display: none;
+		}
+		.image {
+			display: block;
+		}
+		.hero-content {
+			display: block;
+		}
 	}
 `;
 
@@ -101,23 +147,30 @@ const ContactCard = styled(Card)`
 `;
 
 const HomePage = () => {
-	// Function to create Cloudinary URL with responsive parameters
-	const createCloudinaryUrl = (publicId, quality = "auto") => {
-		return `https://res.cloudinary.com/dtbpblrgg/video/upload/q_${quality},w_auto/${publicId}`;
-	};
-
-	// Cloudinary video URL with transformations
-	const cloudinaryVideoUrl = createCloudinaryUrl("homepage_xxie1m");
+	const videoUrl =
+		"https://res.cloudinary.com/dtbpblrgg/video/upload/q_auto,w_auto/homepage_xxie1m.webm";
+	const imageUrl =
+		"https://res.cloudinary.com/dtbpblrgg/image/upload/w_auto/hero-image_t94bpx.jpg";
 
 	return (
 		<div>
 			<HomeNavbar />
 			<Box sx={{ paddingTop: "100px" }}></Box>
 			<HeroSection id="hero" className="hero">
-				<video autoPlay muted loop>
-					<source src={cloudinaryVideoUrl} type="video/webm" />
+				<video className="video" autoPlay muted loop>
+					<source src={videoUrl} type="video/webm" />
 					Your browser does not support the video tag.
 				</video>
+				<img className="image" src={imageUrl} alt="Hero" />
+				<div className="hero-content">
+					<Typography variant="h5" component="h5">
+						Discover Amazing Tourist Attractions in Rwanda
+					</Typography>
+					<Typography variant="body2">
+						GuideGlide helps you explore and learn more about the best tourist
+						spots around you.
+					</Typography>
+				</div>
 				<div className="video-caption">Credit: Visit Rwanda</div>
 			</HeroSection>
 
