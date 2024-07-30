@@ -6,7 +6,7 @@ import styled from "@emotion/styled";
 const StyledCard = styled(Card)`
 	margin: 20px;
 	max-width: 300px;
-	background-color: #f5f5f5;
+	background-color: #c5e3ec;
 	border-radius: 15px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 `;

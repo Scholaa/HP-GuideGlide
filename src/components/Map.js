@@ -11,7 +11,7 @@ import logInteraction from "./logInteraction";
 import AuthenticatedNavbar from "./AuthenticatedNavbar"; // Make sure to import the AuthenticatedNavbar component
 
 const mapContainerStyle = {
-	height: "500px",
+	height: "600px",
 	width: "100%",
 };
 
@@ -44,7 +44,7 @@ const Map = ({ attractions, username, signOut }) => {
 	const handleMarkerClick = (attraction) => {
 		setSelected(attraction);
 		setShowDetails(false);
-		logInteraction(username, attraction.id, "view"); // Use the actual username
+		logInteraction(username, attraction.id, "view"); 
 	};
 
 	if (loadError) return <div>Error loading maps</div>;
@@ -58,7 +58,7 @@ const Map = ({ attractions, username, signOut }) => {
 				<Box sx={{ paddingTop: "20px" }}></Box>
 				<GoogleMap
 					mapContainerStyle={mapContainerStyle}
-					zoom={12}
+					zoom={9}
 					center={center}
 					onClick={onMapClick}
 				>

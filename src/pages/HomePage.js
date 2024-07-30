@@ -257,8 +257,8 @@ const HomePage = () => {
 									AR/VR Experience
 								</Typography>
 								<Typography variant="body1">
-									Experience tourist attractions in an immersive way using AR/VR
-									technology.
+									Experience tourist attractions in an immersive and interactive
+									way using Augmented Reality /Virtual Reality technology.
 								</Typography>
 							</FeatureCard>
 						</Grid>
@@ -269,7 +269,7 @@ const HomePage = () => {
 								</Typography>
 								<Typography variant="body1">
 									Get voice-guided assistance for a hands-free experience while
-									exploring.
+									exploring, and fully immerse yourself in your surroundings.
 								</Typography>
 							</FeatureCard>
 						</Grid>

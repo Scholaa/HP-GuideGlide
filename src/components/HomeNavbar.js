@@ -73,7 +73,13 @@ const HomeNavbar = () => {
 	return (
 		<AppBar position="fixed">
 			<Toolbar>
-				<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+				<Typography
+					variant="h6"
+					style={{ textDecoration: "none", color: "inherit" }}
+					component={RouterLink}
+					to="/"
+					sx={{ flexGrow: 1 }}
+				>
 					GuideGlide
 				</Typography>
 				{isMobile ? (
