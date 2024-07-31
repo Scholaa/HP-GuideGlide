@@ -1,0 +1,50 @@
+const AWS = require('aws-sdk');
+const docClient = new AWS.DynamoDB.DocumentClient();
+
+exports.handler = async (event) => {
+    if (event.httpMethod === 'OPTIONS') {
+        return {
+            statusCode: 200,
+            headers: {
+                "Access-Control-Allow-Headers": "Content-Type,Authorization",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "OPTIONS,POST,PUT,GET"
+            },
+            body: JSON.stringify('CORS preflight response'),
+        };
+    }
+
+    const userId = event.headers.Authorization.split(' ')[1];
+    const profile = JSON.parse(event.body);
+    profile.userId = userId;
+
+    const params = {
+        TableName: 'UserProfile',
+        Item: profile
+    };
+
+    try {
+        await docClient.put(params).promise();
+
+        return {
+            statusCode: 200,
+            headers: {
+                "Access-Control-Allow-Headers": "Content-Type,Authorization",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "OPTIONS,POST,PUT,GET"
+            },
+            body: JSON.stringify(profile)
+        };
+    } catch (error) {
+        console.error('Error updating profile:', error);
+        return {
+            statusCode: 500,
+            headers: {
+                "Access-Control-Allow-Headers": "Content-Type,Authorization",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "OPTIONS,POST,PUT,GET"
+            },
+            body: JSON.stringify({ error: 'Failed to update profile' })
+        };
+    }
+};

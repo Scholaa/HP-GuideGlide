@@ -1,0 +1,81 @@
+const AWS = require('aws-sdk');
+const dynamo = new AWS.DynamoDB.DocumentClient();
+
+exports.handler = async (event) => {
+    console.log('Received event:', JSON.stringify(event, null, 2));
+
+    const headers = {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type,Authorization",
+        "Access-Control-Allow-Methods": "OPTIONS,GET"
+    };
+
+    // Immediately respond to CORS preflight requests
+    if (event.httpMethod === 'OPTIONS') {
+        return {
+            statusCode: 200,
+            headers: headers,
+            body: JSON.stringify({ message: "CORS preflight response" })
+        };
+    }
+
+    // Ensure city parameter is present
+    if (!event.queryStringParameters || !event.queryStringParameters.city) {
+        return {
+            statusCode: 400,
+            headers: headers,
+            body: JSON.stringify({ error: "City parameter is missing" })
+        };
+    }
+
+    const city = event.queryStringParameters.city.toLowerCase();
+    const params = {
+        TableName: 'TransportGuides',
+        Key: {
+            city: city
+        }
+    };
+
+    try {
+        let data = await dynamo.get(params).promise();
+        console.log('DynamoDB response data:', JSON.stringify(data, null, 2));
+
+        // Check if the requested city data exists
+        if (!data.Item) {
+            console.log('No data found for city:', city);
+
+            // Fallback to default city Gisenyi
+            const defaultCityParams = {
+                TableName: 'TransportGuides',
+                Key: {
+                    city: 'gisenyi'  // Default city
+                }
+            };
+            data = await dynamo.get(defaultCityParams).promise();
+            console.log('Fallback to default city data:', JSON.stringify(data, null, 2));
+
+            if (!data.Item) {
+                console.log('No data found for default city: Gisenyi');
+                return {
+                    statusCode: 404,
+                    headers: headers,
+                    body: JSON.stringify({ error: "No data found for the requested city and default city" })
+                };
+            }
+        }
+
+        return {
+            statusCode: 200,
+            headers: headers,
+            body: JSON.stringify(data.Item)
+        };
+    } catch (error) {
+        console.error('Error querying DynamoDB:', error);
+        return {
+            statusCode: 500,
+            headers: headers,
+            body: JSON.stringify({ error: "Internal server error: " + error.message })
+        };
+    }
+};

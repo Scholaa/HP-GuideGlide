@@ -1,0 +1,93 @@
+const AWS = require('aws-sdk');
+const dynamoDb = new AWS.DynamoDB.DocumentClient();
+const INTERACTIONS_TABLE_NAME = 'userInteractions';
+const USER_PROFILES_TABLE_NAME = 'GuideGlideUsers';
+
+exports.handler = async (event) => {
+  const headers = {
+    'Access-Control-Allow-Origin': '*', 
+    'Access-Control-Allow-Methods': 'POST, OPTIONS', 
+    'Access-Control-Allow-Headers': 'Content-Type' 
+  };
+
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers: headers,
+      body: JSON.stringify({ message: 'CORS preflight response' })
+    };
+  }
+
+  const requestBody = JSON.parse(event.body);
+  console.log('Request Body:', requestBody);
+  const { username, attractionId, interactionType } = requestBody;
+
+  if (!username) {
+    console.error('Username is not provided');
+    return {
+      statusCode: 400,
+      headers: headers,
+      body: JSON.stringify({ error: 'Username is required' }),
+    };
+  }
+
+  // Retrieve userId from UserProfiles table
+  let userId;
+  try {
+    const result = await dynamoDb.query({
+      TableName: USER_PROFILES_TABLE_NAME,
+      IndexName: 'UsernameIndex',
+      KeyConditionExpression: 'username = :username',
+      ExpressionAttributeValues: {
+        ':username': username
+      }
+    }).promise();
+
+    if (result.Items && result.Items.length > 0) {
+      userId = result.Items[0].userId;
+    } else {
+      return {
+        statusCode: 404,
+        headers: headers,
+        body: JSON.stringify({ error: 'User not found' }),
+      };
+    }
+  } catch (error) {
+    console.error('Error retrieving userId:', error);
+    return {
+      statusCode: 500,
+      headers: headers,
+      body: JSON.stringify({ error: 'Error retrieving userId' }),
+    };
+  }
+
+  const timestamp = new Date().toISOString();
+
+  const params = {
+    TableName: INTERACTIONS_TABLE_NAME,
+    Item: {
+      userId,
+      username, 
+      timestamp, 
+      attractionId,
+      interactionType
+    }
+  };
+
+  try {
+    await dynamoDb.put(params).promise();
+    return {
+      statusCode: 200,
+      headers: headers,
+      body: JSON.stringify({ message: 'Interaction logged successfully' }),
+    };
+  } catch (error) {
+    console.error('Error logging interaction:', error);
+    return {
+      statusCode: 500,
+      headers: headers,
+      body: JSON.stringify({ error: 'Error logging interaction' }),
+    };
+  }
+};
+
