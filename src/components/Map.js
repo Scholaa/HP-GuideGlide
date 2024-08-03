@@ -8,7 +8,7 @@ import {
 import { Button, Typography, Box, Paper } from "@mui/material";
 import { styled } from "@mui/system";
 import logInteraction from "./logInteraction";
-import AuthenticatedNavbar from "./AuthenticatedNavbar"; // Make sure to import the AuthenticatedNavbar component
+import AuthenticatedNavbar from "./AuthenticatedNavbar"; 
 
 const mapContainerStyle = {
 	height: "600px",

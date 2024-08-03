@@ -4,10 +4,10 @@
 const awsmobile = {
 	aws_project_region: "us-east-1",
 	aws_cognito_identity_pool_id:
-		"us-east-1:43b0c8cd-fa2f-4df6-9c05-d691279c53f6",
+		"us-east-1:1c843e86-e72d-49f0-a909-dbcd84bb2691",
 	aws_cognito_region: "us-east-1",
-	aws_user_pools_id: "us-east-1_KlLAMMzjF",
-	aws_user_pools_web_client_id: "5on241l9tpilsa9mmblco45chh",
+	aws_user_pools_id: "us-east-1_eG5WTl36x",
+	aws_user_pools_web_client_id: "ap35s0lgkee3gcu93jog9s0tg",
 	oauth: {},
 	aws_cognito_username_attributes: [],
 	aws_cognito_social_providers: [],
@@ -21,9 +21,9 @@ const awsmobile = {
 	aws_cognito_verification_mechanisms: ["EMAIL"],
 	Auth: {
 		region: "us-east-1",
-		userPoolId: "us-east-1_KlLAMMzjF",
-		userPoolWebClientId: "5on241l9tpilsa9mmblco45chh",
-		identityPoolId: "us-east-1:43b0c8cd-fa2f-4df6-9c05-d691279c53f6",
+		userPoolId: "us-east-1_eG5WTl36x",
+		userPoolWebClientId: "ap35s0lgkee3gcu93jog9s0tg",
+		identityPoolId: "us-east-1:1c843e86-e72d-49f0-a909-dbcd84bb2691",
 		mandatorySignIn: true,
 	},
 	API: {
